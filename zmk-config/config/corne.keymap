@@ -219,6 +219,18 @@
         };		
     };
 
+    macros {
+        pound: u_a_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL &kp LSHFT>
+                , <&macro_tap &kp U &kp A &kp NUMBER_3>
+                , <&macro_release &kp LCTRL &kp LSHFT>
+                ;
+        };
+    };
+
     keymap {
 		compatible = "zmk,keymap";
             
@@ -227,7 +239,7 @@
             // | none |1 Q !|2 W @|3 E #|4 R $|5 T %|   |6 Y ^|7 U  &|8 I *|9 O (|0 P )| none |
             // | none |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | none |
             // | none |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | none |
-            //                    | LST | GUI | SPC |   | ENT | BSPC | TO |
+            //                    | LST | GUI | SPC |   | ENT | BSPC | TO1 |
 			bindings = <
 				&none    &qoexcl 1 Q    &wtwat 2 W    &ethhash 3 E    &rfodllr 4 R    &tfiper 5 T 				&ysicar 6 Y    &useamp 7 U    &ieast 8 I    &onlpar 9 O    &pzrpar 0 P    &none
 				&none    &kp A          &kp S         &hm LALT D      &hm LCTRL F     &kp G 			       	&kp H          &hm RCTRL J    &hm RALT K    &kp L          &kp SEMI       &none
@@ -238,18 +250,18 @@
 
     	left_layer {
             // -----------------------------------------------------------------------------------------
-            // | none |  ESC  |  @  |  #  |  $  |  %  |                                                                 |  ^  |  *   |  UP | _ - |  + =  | none |
-            // | none |  TAB  |  [  |  ]  |  *  |  '  |                                                                 |  \  | LEFT |DOWN |RIGHT|  *   |
-            // | none |   ~   |  *  |  *  |  *  |  "  |                                                                 |  [  |  (   |  )  |  ]  | TO3  | none |
-            //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-			bindings = <
-				&none    &kp ESC      &kp AT        &kp HASH        &kp DLLR            &kp PRCNT		                &kp CARET    &kp ASTERISK      &kp UP_ARROW      &kp MINUS          &kp EQUAL    &none
-				&none    &kp TAB      &kp LBKT     &kp LA(RBKT)    &kp LA(LS(RBKT))    &kp SQT 		                &kp BSLH     &kp LEFT_ARROW    &kp DOWN_ARROW    &kp RIGHT_ARROW    &kp ENTER   &none
-				&none    &kp TILDE    &kp EQUAL    &kp LA(LBKT)    &kp LA(LS(LBKT))    &kp DQT                         &kp LBKT     &kp LPRN          &kp RPRN          &kp RBKT           &to 3       &none
-							                                      &to 0    &sk LGUI    &kp LSHIFT                       &kp RET    &sk BACKSPACE    &to 2 
+            // | none |  ESC  |   @  |  #   |   $  |  %  |                                                     |  ^  |  *   |  UP | _ - |  + =  | none |
+            // | none |  TAB  |   {  |  }   |   £  | ' " |                                                     | \ | | LEFT |DOWN |RIGHT|  |    | none |
+            // | none |   ~   |   [  |  (   |   )  |  ]  |                                                     |HOME |  End |PG_UP|PG_DN| TO3   | none |
+            //                         | GUI | LWR | SPC |                                                     | ENT | BSPC | TO2 |
+			bindings = < 
+				&none    &kp ESC      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT                       &kp CARET      &kp ASTERISK        &kp UP_ARROW        &kp MINUS            &kp EQUAL      &none
+				&none    &kp TAB      &kp LBRC      &kp RBRC      &pound        &kp SQT 		                &kp BSLH       &kp LEFT_ARROW      &kp DOWN_ARROW      &kp RIGHT_ARROW      &kp SQT        &none
+				&none    &kp TILDE    &kp LBKT      &kp LPRN      &kp RPRN      &kp RBKT                        &kp HOME       &kp END             &kp PG_UP           &kp PG_DN            &to 3          &none
+							                        &to 0         &sk LGUI      &kp LSHIFT                      &kp RET        &sk BACKSPACE       &to 2 
 			>;
 		};
-	
+
 		right_layer {
 			bindings = <
 				&none    &kp ESC    &kp C_PP    &kp C_PREV      &kp C_NEXT      &kp LS(MINUS)    		                        &kp MINUS    &kp N7    &kp N8    &kp N9    &none       &none 
