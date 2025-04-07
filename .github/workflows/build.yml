@@ -166,9 +166,23 @@ jobs:
     needs: build
     name: Merge Output Artifacts
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch tags
+        run: git fetch --tags
+
+      - name: Get next archive version
+        id: version
+        run: |
+          count=$(git tag -l "v_*" | wc -l)
+          echo "version_number=$((count + 1))" >> $GITHUB_OUTPUT
+      
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: ${{ env.archive_name }}
+          name: v_${{ steps.version.outputs.version_number }}
           pattern: artifact-*
           delete-merged: true
