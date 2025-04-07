@@ -174,11 +174,11 @@ jobs:
       - name: Fetch tags
         run: git fetch --tags
 
-      - name: Get next archive version
+      - name: Get archive version
         id: version
         run: |
           count=$(git tag -l "v_*" | wc -l)
-          echo "version_number=$((count + 1))" >> $GITHUB_OUTPUT
+          echo "version_number=$((count))" >> $GITHUB_OUTPUT
       
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
