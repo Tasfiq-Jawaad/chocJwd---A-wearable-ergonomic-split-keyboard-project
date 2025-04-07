@@ -6,7 +6,13 @@
     # uses: Tasfiq-Jawaad/jmk-modified-zmk-firmware/.github/workflows/build-user-config.yml@main
 name: Reusable user config build
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    tags:
+      - '*'
+    paths:
+      - 'zmk-config/**'
+  workflow_dispatch:
 
 env:
   build_matrix_path: build.yaml
@@ -161,28 +167,29 @@ jobs:
           name: artifact-${{ env.artifact_name }}
           path: ${{ env.build_dir }}/zmk-config/artifacts
 
-  merge:
-    runs-on: ubuntu-latest
-    needs: build
-    name: Merge Output Artifacts
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+merge:
+  runs-on: ubuntu-latest
+  needs: build
+  name: Merge Output Artifacts
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-      - name: Fetch tags
-        run: git fetch --tags
+    - name: Fetch tags
+      run: git fetch --tags
 
-      - name: Get archive version
-        id: version
-        run: |
-          count=$(git tag -l "v_*" | wc -l)
-          echo "version_number=$((count))" >> $GITHUB_OUTPUT
-      
-      - name: Merge Artifacts
-        uses: actions/upload-artifact/merge@v4
-        with:
-          name: v_${{ steps.version.outputs.version_number }}
-          pattern: artifact-*
-          delete-merged: true
+    - name: Get the tag name
+      id: tag_name
+      run: |
+        # Get the tag name that triggered the push
+        TAG_NAME=$(git describe --tags --abbrev=0)
+        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+    - name: Merge Artifacts
+      uses: actions/upload-artifact/merge@v4
+      with:
+        name: ${{ env.TAG_NAME }}  # Use the tag name dynamically
+        pattern: artifact-*
+        delete-merged: true
