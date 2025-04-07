@@ -167,29 +167,29 @@ jobs:
           name: artifact-${{ env.artifact_name }}
           path: ${{ env.build_dir }}/zmk-config/artifacts
 
-merge:
-  runs-on: ubuntu-latest
-  needs: build
-  name: Merge Output Artifacts
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Fetch tags
-      run: git fetch --tags
-
-    - name: Get the tag name
-      id: tag_name
-      run: |
-        # Get the tag name that triggered the push
-        TAG_NAME=$(git describe --tags --abbrev=0)
-        echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
-
-    - name: Merge Artifacts
-      uses: actions/upload-artifact/merge@v4
-      with:
-        name: ${{ env.TAG_NAME }}  # Use the tag name dynamically
-        pattern: artifact-*
-        delete-merged: true
+  merge:
+    runs-on: ubuntu-latest
+    needs: build
+    name: Merge Output Artifacts
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+  
+      - name: Fetch tags
+        run: git fetch --tags
+  
+      - name: Get the tag name
+        id: tag_name
+        run: |
+          # Get the tag name that triggered the push
+          TAG_NAME=$(git describe --tags --abbrev=0)
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+  
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: ${{ env.TAG_NAME }}  # Use the tag name dynamically
+          pattern: artifact-*
+          delete-merged: true
