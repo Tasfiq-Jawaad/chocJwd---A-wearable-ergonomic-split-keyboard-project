@@ -275,7 +275,7 @@
 		right_layer {
 			bindings = <
 				&none    &kp ESC    &kp C_PP    &kp C_PREV      &kp C_NEXT      &kp LS(MINUS)    		                        &kp MINUS    &kp N7    &kp N8    &kp N9    &none       &none 
-				&none    &kp TAB    &none      &kp C_VOL_DN    &kp C_VOL_UP    &kp LS(EQUAL) 			                        &kp EQUAL    &kp N4    &kp N5    &kp N6    &kp ENTER    &none 
+				&none    &kp TAB    &none       &kp C_VOL_DN    &kp C_VOL_UP    &kp LS(EQUAL) 			                        &kp EQUAL    &kp N4    &kp N5    &kp N6    &kp ENTER    &none 
 				&none    &to 4      &kp AMPS    &kp SLASH       &kp STAR        &kp DOT    			                        &kp N0       &kp N1    &kp N2    &kp N3    &none       &none 
 							                        &to 0    &sk LGUI    &kp SPACE                                          &kp RET	   &sk RALT    &to 4 
 			>;
@@ -295,8 +295,17 @@
 				&none    &none    &none         &none         &none         &none           								&none          &none    &none    &none    &none    &none
 				&none    &none    &none         &none         &none         &none            								&none          &none    &none    &none    &none    &none
 				&none    &none    &bt BT_PRV    &bt BT_NXT    &bt BT_CLR    &bootloader       								&bootloader    &none    &none    &none    &none    &none
+							 									&to 0    &none    &none  					            &none    &none    &to 5
+			>;
+		};
+
+        ocd_layer {
+			bindings = <
+				&none    &none    &none         &none         &none         &none           								&none          &none    &none    &none    &none    &none
+				&none    &none    &none         &none         &none         &none            								&none          &none    &none    &none    &none    &none
+				&none    &none    &none         &none         &none         &none            								&none          &none    &none    &none    &none    &none
 							 									&to 0    &none    &none  					            &none    &none    &none
 			>;
-		};	
+		};		
 	};
 };
