@@ -266,7 +266,7 @@
             //                         | GUI | LWR | SPC |                                                     | ENT | BSPC | TO2 |
 			bindings = < 
 				&none    &kp ESC      &kp AT        &kp HASH           &kp DLLR            &kp PRCNT                       &kp CARET      &kp ASTERISK              &kp UP_ARROW             &kp MINUS            &kp EQUAL      &none
-				&none    &kp TAB      &kp LBRC      &hm LALT RBRC      &hp LCTRL DLLR      &kp SQT 		                   &kp BSLH       &hm RCTRL LEFT_ARROW      &hm RALT DOWN_ARROW      &kp RIGHT_ARROW      &kp SQT        &none
+				&none    &kp TAB      &kp LBRC      &hm LALT RBRC      &hp LCTRL           &kp SQT 		                   &kp BSLH       &hm RCTRL LEFT_ARROW      &hm RALT DOWN_ARROW      &kp RIGHT_ARROW      &kp SQT        &none
 				&none    &kp TILDE    &kp LBKT      &kp LPRN           &kp RPRN            &kp RBKT                        &kp HOME       &kp END                   &kp PG_UP                &kp PG_DN            &to 3          &none
 							                        &to 0              &sk LGUI            &sk LSHIFT                      &kp RET        &kp BACKSPACE             &to 2 
 			>;
@@ -309,3 +309,5 @@
 		};		
 	};
 };
+
+asf{}[(%$$$$$$$$$$$$$$$$$$fghjkl;q2wertyuiopzxcvbn,m,,/\\\
