@@ -272,5 +272,14 @@
 							                        &to 0    &sk LGUI    &kp SPACE                                          &kp RET	   &sk RALT    &to 4 
 			>;
 		};
+						 
+		tri_layer {
+			bindings = <
+				&none    &none                 &msc SCRL_LEFT    &mmv MOVE_UP      &msc SCRL_RIGHT    &kp NUM_5 			&kp LG(LBKT)   &kp LC(LS(TAB))   &kp RC(TAB) &kp LG(RBKT) &none &none
+				&none    &kp F1                 &mmv MOVE_LEFT    &mmv MOVE_DOWN    &mmv MOVE_RIGHT    &kp DEL  						&kp LEFT &kp DOWN  &kp UP &kp RIGHT &kp ENTER  &none
+				&none    &td LG(GRAVE) GRAVE    &mkp LCLK         &msc SCRL_UP      &msc SCRL_DOWN     &mkp RCLK   				&mkp LCLK &kp PG_DN  &kp K_VOL_DN  &none &none    &none
+							 &to 0 &none &none  					&none &sk RALT &none
+			>;
+		};
 	};
 };
