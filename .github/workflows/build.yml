@@ -193,3 +193,27 @@ jobs:
           name: ${{ env.TAG_NAME }} # Use the tag name dynamically
           pattern: artifact-*
           delete-merged: true
+
+  create_release:
+    runs-on: ubuntu-latest
+    needs: merge
+    name: Create GitHub Release
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get the tag name
+        id: tag_name
+        run: |
+          # Get the tag name that triggered the push
+          TAG_NAME=$(git describe --tags --abbrev=0)
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ needs.merge.outputs.artifacts }} # Path to the merged artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
