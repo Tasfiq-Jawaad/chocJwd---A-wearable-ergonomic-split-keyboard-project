@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 env:
-  build_matrix_path: build.yaml
+  build_matrix_path: zmk-config/build.yaml
   config_path: zmk-config/config
   fallback_binary: bin
   archive_name: firmware
