@@ -194,29 +194,32 @@ jobs:
           pattern: artifact-*
           delete-merged: true
 
+      - name: Set output tag name
+        id: set_output
+        run: echo "tag_name=${{ env.TAG_NAME }}" >> $GITHUB_OUTPUT
+
+    outputs:
+      TAG_NAME: ${{ steps.set_output.outputs.tag_name }}
+
   create_release:
     runs-on: ubuntu-latest
     needs: merge
     permissions:
-      contents: write # Allows creating releases
-      id-token: write # Required for tagging
-    name: Create GitHub Release
+      contents: write
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - name: Download merged artifact
+        uses: actions/download-artifact@v4
         with:
-          fetch-depth: 0
+          name: ${{ needs.merge.outputs.TAG_NAME }}
+          path: release-assets
 
-      - name: Get the tag name
-        id: tag_name
-        run: |
-          # Get the tag name that triggered the push
-          TAG_NAME=$(git describe --tags --abbrev=0)
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+      - name: List downloaded files
+        run: ls -R release-assets
 
-      - name: Create Release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ needs.merge.outputs.artifacts }} # Path to the merged artifacts
+          tag_name: ${{ needs.merge.outputs.TAG_NAME }}
+          files: release-assets/**
         env:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
