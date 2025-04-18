@@ -8,10 +8,10 @@ name: Reusable user config build
 
 on:
   push:
-    # tags:
-    #   - 'chocjwd_v*'
-    # paths:
-    #   - "zmk-config/**"
+    tags:
+      - "chocjwd_v*"
+    paths:
+      - "zmk-config/**"
   workflow_dispatch:
 
 env:
@@ -216,4 +216,4 @@ jobs:
         with:
           files: ${{ needs.merge.outputs.artifacts }} # Path to the merged artifacts
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
