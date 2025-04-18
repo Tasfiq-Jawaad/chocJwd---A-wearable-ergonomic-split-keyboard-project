@@ -3,10 +3,20 @@ name: Build ZMK firmware
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      config-path: echo "config"
+      build-matrix-path: echo "build.yaml"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Move files to root
+        run: |
+          mv zmk-config/build.yaml build.yaml
+          mv zmk-config/config config
+
   build:
+    needs: prepare
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      build_matrix_path: zmk-config/build.yaml
-      config_path: zmk-config/config
-      fallback_binary: bin # Optional: use default if needed
-      archive_name: firmware # Optional: use default if needed
